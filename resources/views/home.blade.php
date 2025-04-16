@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome | ECEs</title>
+    <title>Home | ECEs</title>
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
     <style>
         body {
@@ -41,6 +41,10 @@
             font-size: 2.2rem;
             color: #444;
         }
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+        }
         .nav-buttons button {
             margin-left: 10px;
             padding: 8px 16px;
@@ -53,6 +57,13 @@
         }
         .nav-buttons button:hover {
             background-color: #ccc;
+        }
+        .profile-icon {
+            margin-left: 15px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #222;
         }
         .card {
             background: #eaeaea;
@@ -91,11 +102,18 @@
 
     <div class="main">
         <div class="header">
-           
+            
             <div class="nav-buttons">
                 <a href="{{ url('/') }}"><button>HOME</button></a>
                 <a href="{{ url('/chat') }}"><button>AI CHAT</button></a>
-                <a href="{{ url('/login') }}"><button>LOGIN</button></a>
+                <div class="profile-icon"></div>
+                <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="btn">
+                        Logout
+                    </button>
+                </form>
+
             </div>
         </div>
 
