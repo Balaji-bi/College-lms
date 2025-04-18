@@ -58,13 +58,7 @@
         .nav-buttons button:hover {
             background-color: #ccc;
         }
-        .profile-icon {
-            margin-left: 15px;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background-color: #222;
-        }
+        
         .card {
             background: #eaeaea;
             padding: 30px;
@@ -106,7 +100,15 @@
             <div class="nav-buttons">
                 <a href="{{ url('/') }}"><button>HOME</button></a>
                 <a href="{{ url('/chat') }}"><button>AI CHAT</button></a>
-                <div class="profile-icon"></div>
+                <div class="profile-icon">
+                    <a href="{{ route('profile.show') }}" class="profile-link">
+                        @if(auth()->user()->profile_photo)
+                            <img src="{{ asset('storage/profile_photos/'.auth()->user()->profile_photo) }}" alt="Profile">
+                        @else
+                            <div class="profile-icon">{{ substr(auth()->user()->name ?? 'U', 0, 1) }}</div>
+                        @endif
+                    </a>
+                </div>
                 <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                     @csrf
                     <button type="submit" class="btn">

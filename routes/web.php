@@ -3,6 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 
+use App\Http\Controllers\ProfileController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
+    Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile/check-completion', [App\Http\Controllers\ProfileController::class, 'checkProfileCompletion'])->name('profile.check-completion');
+});
+
 Route::get('/auth/google', [LoginController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
 

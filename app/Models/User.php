@@ -17,7 +17,12 @@ class User extends Authenticatable
         'password',
         'google_id', // Add this field
         'user_type', // For multiple user types
+        'year', 'phone', 'role', 'profile_photo', 'college'
+
     ];
+    // app/Models/User.php
+
+    
 
     protected $hidden = [
         'password',
