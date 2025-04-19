@@ -87,10 +87,10 @@
 </head>
 <body>
     <div class="sidebar">
-        <a href="#">Assignment Gen</a>
-        <a href="#">Paper Create</a>
-        <a href="#">Resume Gen</a>
-        <a href="#">Image Gen</a>
+        <a href="#">Assignment Generation</a>
+        <a href="#">Paper Creation</a>
+        <a href="#">Resume Generation</a>
+        <a href="#">Image Generation</a>
         <a href="#">Rewriting Content</a>
     </div>
 
