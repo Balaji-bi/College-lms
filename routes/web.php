@@ -41,3 +41,12 @@ Route::group(['middleware' => ['auth', 'user.type:user']], function () {
     Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
     // Other user routes...
 });
+
+// routes/web.php (add these routes to your existing routes file)
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/forum', [App\Http\Controllers\ForumMessageController::class, 'index'])->name('forum.index');
+    Route::post('/forum/message', [App\Http\Controllers\ForumMessageController::class, 'store'])->name('forum.store');
+    Route::post('/forum/message/{id}/like', [App\Http\Controllers\ForumMessageController::class, 'like'])->name('forum.like');
+    Route::delete('/forum/message/{id}', [App\Http\Controllers\ForumMessageController::class, 'destroy'])->name('forum.destroy');
+});
