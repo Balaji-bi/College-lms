@@ -10,12 +10,13 @@ return new class extends Migration
     {
         Schema::create('forum_messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sender_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->text('message')->nullable();
-            $table->string('image_path')->nullable();
-            $table->foreignId('reply_to_id')->nullable()->constrained('forum_messages')->onDelete('set null');
-            $table->json('liked_by')->nullable();
+            $table->enum('type', ['text', 'image'])->default('text');
+            $table->string('file_path')->nullable();
+            $table->unsignedBigInteger('reply_to_id')->nullable();
             $table->timestamps();
+            $table->foreign('reply_to_id')->references('id')->on('forum_messages')->onDelete('set null');
         });
     }
 

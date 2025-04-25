@@ -42,11 +42,10 @@ Route::group(['middleware' => ['auth', 'user.type:user']], function () {
     // Other user routes...
 });
 
-// routes/web.php (add these routes to your existing routes file)
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/forum', [App\Http\Controllers\ForumMessageController::class, 'index'])->name('forum.index');
-    Route::post('/forum/message', [App\Http\Controllers\ForumMessageController::class, 'store'])->name('forum.store');
-    Route::post('/forum/message/{id}/like', [App\Http\Controllers\ForumMessageController::class, 'like'])->name('forum.like');
-    Route::delete('/forum/message/{id}', [App\Http\Controllers\ForumMessageController::class, 'destroy'])->name('forum.destroy');
+// Forum routes (protected by auth middleware)
+Route::group(['middleware' => 'auth', 'prefix' => 'forum'], function () {
+    Route::get('/', [App\Http\Controllers\ForumController::class, 'index'])->name('forum.index');
+    Route::post('/message', [App\Http\Controllers\ForumController::class, 'storeMessage'])->name('forum.store');
+    Route::post('/message/{message}/like', [App\Http\Controllers\ForumController::class, 'toggleLike'])->name('forum.like');
+    Route::delete('/message/{message}', [App\Http\Controllers\ForumController::class, 'deleteMessage'])->name('forum.delete');
 });

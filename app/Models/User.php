@@ -33,4 +33,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    // app/Models/User.php (Add these methods to your existing User model)
+
+    /**
+     * Get all forum messages sent by the user
+     */
+    public function forumMessages()
+    {
+        return $this->hasMany(ForumMessage::class);
+    }
+
+    /**
+     * Get all message likes by the user
+     */
+    public function messageLikes()
+    {
+        return $this->hasMany(ForumMessageLike::class);
+    }
+
 }

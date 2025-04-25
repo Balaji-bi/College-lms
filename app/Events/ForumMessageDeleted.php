@@ -10,23 +10,29 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class MessageLiked implements ShouldBroadcast
+class ForumMessageDeleted implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $messageId;
-    public $likedBy;
 
-    public function __construct($messageId, $likedBy)
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
+    public function __construct($messageId)
     {
         $this->messageId = $messageId;
-        $this->likedBy = $likedBy;
     }
 
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return \Illuminate\Broadcasting\Channel|array
+     */
     public function broadcastOn()
     {
-        return new PrivateChannel('forum');
+        return new Channel('forum');
     }
 }
-
-
